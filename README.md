@@ -90,3 +90,7 @@ Check the result with `hugo server` before committing. The overrides in `layouts
 
 - [Blackburn](https://github.com/yoshiharuyamashita/blackburn) by Yoshiharu Yamashita, MIT License. The files in `layouts/` are based on it.
 - [Pure CSS](https://purecss.io/), [Font Awesome](https://fontawesome.com/), [Hugo](https://gohugo.io/).
+
+## License
+
+MIT. See [LICENSE](LICENSE).
