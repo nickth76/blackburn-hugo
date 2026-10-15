@@ -1,0 +1,9 @@
+# Hugo output and caches
+/public/
+/resources/_gen/
+.hugo_build.lock
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini

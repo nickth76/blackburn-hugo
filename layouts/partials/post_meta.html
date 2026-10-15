@@ -1,0 +1,22 @@
+<div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">{{ .Date | time.Format (site.Params.dateFormat | default ":date_medium") }}</time>
+  </div>
+
+  {{- with .GetTerms "topics" }}
+  <div>
+    <i class="fa fa-folder fa-fw"></i>
+    {{ range $i, $t := . }}{{ if $i }}&nbsp;&#47; {{ end }}<a class="post-taxonomy-topic" href="{{ $t.RelPermalink }}">{{ $t.LinkTitle }}</a>{{ end }}
+  </div>
+  {{- end }}
+
+  {{- with .GetTerms "tags" }}
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    {{ range $i, $t := . }}{{ if $i }}&nbsp;&#47; {{ end }}<a class="post-taxonomy-tag" href="{{ $t.RelPermalink }}">{{ $t.LinkTitle }}</a>{{ end }}
+  </div>
+  {{- end }}
+
+</div>

@@ -1,0 +1,18 @@
+{{- /* Section list (e.g. /post/). Replaces the theme's section.html, which renders an empty page without a baseof.html. */ -}}
+{{ partial "header.html" . }}
+
+<div class="header">
+  <h1>{{ .Title }}</h1>
+  {{ with .Description }}<h2>{{ . }}</h2>{{ end }}
+</div>
+<div class="content">
+  {{ .Content }}
+
+  {{ range (.Paginate .RegularPages).Pages }}
+    {{ .Render "summary" }}
+  {{ end }}
+
+  {{ partial "pagination.html" . }}
+</div>
+
+{{ partial "footer.html" . }}

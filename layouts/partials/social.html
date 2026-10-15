@@ -1,0 +1,71 @@
+{{- /*
+  Side menu links. Each [params.social] value can be a username (joined to the
+  URL pattern below) or a full http(s) URL, which is used as is.
+  Mastodon also accepts "@user@instance.tld".
+*/ -}}
+{{- $networks := slice
+  (dict "key" "github" "label" "GitHub" "url" "https://github.com/%s" "icon" "fab fa-github-square")
+  (dict "key" "gitlab" "label" "GitLab" "url" "https://gitlab.com/%s" "icon" "fab fa-gitlab")
+  (dict "key" "codeberg" "label" "Codeberg" "url" "https://codeberg.org/%s" "icon" "fas fa-code-branch")
+  (dict "key" "bitbucket" "label" "Bitbucket" "url" "https://bitbucket.org/%s" "icon" "fab fa-bitbucket")
+  (dict "key" "stackoverflow" "label" "Stack Overflow" "url" "https://stackoverflow.com/users/%s" "icon" "fab fa-stack-overflow")
+  (dict "key" "serverfault" "label" "Server Fault" "url" "https://serverfault.com/users/%s" "icon" "fas fa-server")
+  (dict "key" "mastodon" "label" "Mastodon" "url" "https://mastodon.social/%s" "icon" "fab fa-mastodon")
+  (dict "key" "bluesky" "label" "Bluesky" "url" "https://bsky.app/profile/%s" "icon" "fas fa-cloud")
+  (dict "key" "gnusocial" "label" "GNU social" "url" "%s" "icon" "fas fa-comment")
+  (dict "key" "twitter" "label" "X (Twitter)" "url" "https://x.com/%s" "icon" "fab fa-twitter-square")
+  (dict "key" "facebook" "label" "Facebook" "url" "https://facebook.com/%s" "icon" "fab fa-facebook-square")
+  (dict "key" "weibo" "label" "Weibo" "url" "https://weibo.com/%s" "icon" "fab fa-weibo")
+  (dict "key" "tumblr" "label" "Tumblr" "url" "https://%s.tumblr.com/" "icon" "fab fa-tumblr-square")
+  (dict "key" "instagram" "label" "Instagram" "url" "https://instagram.com/%s" "icon" "fab fa-instagram")
+  (dict "key" "flickr" "label" "Flickr" "url" "https://flickr.com/photos/%s" "icon" "fab fa-flickr")
+  (dict "key" "photo500px" "label" "500px" "url" "https://500px.com/%s" "icon" "fab fa-500px")
+  (dict "key" "pinterest" "label" "Pinterest" "url" "https://pinterest.com/%s" "icon" "fab fa-pinterest-square")
+  (dict "key" "youtube" "label" "YouTube" "url" "https://www.youtube.com/%s" "icon" "fab fa-youtube-square")
+  (dict "key" "vimeo" "label" "Vimeo" "url" "https://vimeo.com/%s" "icon" "fab fa-vimeo-square")
+  (dict "key" "slideshare" "label" "SlideShare" "url" "https://slideshare.net/%s" "icon" "fab fa-slideshare")
+  (dict "key" "linkedin" "label" "LinkedIn" "url" "https://linkedin.com/in/%s" "icon" "fab fa-linkedin")
+  (dict "key" "xing" "label" "Xing" "url" "https://xing.com/profile/%s" "icon" "fab fa-xing-square")
+  (dict "key" "reddit" "label" "Reddit" "url" "https://reddit.com/user/%s" "icon" "fab fa-reddit-square")
+  (dict "key" "hackernews" "label" "Hacker News" "url" "https://news.ycombinator.com/user?id=%s" "icon" "fab fa-hacker-news")
+  (dict "key" "steam" "label" "Steam" "url" "https://steamcommunity.com/id/%s" "icon" "fab fa-steam-square")
+  (dict "key" "mobygames" "label" "MobyGames" "url" "https://www.mobygames.com/developer/sheet/view/developerId,%s" "icon" "fas fa-gamepad")
+  (dict "key" "lastfm" "label" "Last.fm" "url" "https://last.fm/user/%s" "icon" "fab fa-lastfm-square")
+  (dict "key" "discogs" "label" "Discogs" "url" "https://www.discogs.com/user/%s" "icon" "fas fa-music")
+  (dict "key" "keybase" "label" "Keybase" "url" "https://keybase.io/%s" "icon" "fas fa-key")
+  (dict "key" "telegram" "label" "Telegram" "url" "https://t.me/%s" "icon" "fab fa-telegram")
+  (dict "key" "matrix" "label" "Matrix" "url" "https://matrix.to/#/%s" "icon" "fas fa-comments")
+}}
+{{- $social := site.Params.social | default (dict) }}
+<div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    {{- with .OutputFormats.Get "rss" }}
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="{{ .RelPermalink }}"><i class="fas fa-rss fa-fw"></i>RSS</a>
+    </li>
+    {{- end }}
+
+    {{- range $n := $networks }}
+    {{- with index $social $n.key }}
+    {{- $v := string . }}
+    {{- $url := printf $n.url $v }}
+    {{- if or (strings.HasPrefix $v "https://") (strings.HasPrefix $v "http://") }}
+      {{- $url = $v }}
+    {{- else if and (eq $n.key "mastodon") (findRE `^@?[^@\s]+@[^@\s]+$` $v) }}
+      {{- $parts := split (strings.TrimPrefix "@" $v) "@" }}
+      {{- $url = printf "https://%s/@%s" (index $parts 1) (index $parts 0) }}
+    {{- end }}
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="{{ $url }}" rel="me noopener" target="_blank"><i class="{{ $n.icon }} fa-fw"></i>{{ $n.label }}</a>
+    </li>
+    {{- end }}
+    {{- end }}
+
+    {{- range site.Params.social_links }}
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="{{ .url }}" rel="me noopener" target="_blank"><i class="{{ .icon | default "fas fa-link" }} fa-fw"></i>{{ .name }}</a>
+    </li>
+    {{- end }}
+  </ul>
+</div>

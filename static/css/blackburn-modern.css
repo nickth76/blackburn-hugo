@@ -1,0 +1,72 @@
+/* Additions to the Blackburn theme styles. */
+
+/* Search box in the side menu */
+.search-box {
+  display: flex;
+  padding: 10px 20px;
+}
+
+.search-box input[type="search"] {
+  flex: 1;
+  min-width: 0;
+  padding: 5px;
+  border: 1px solid #444;
+  border-radius: 4px 0 0 4px;
+  background-color: #333;
+  color: #fff;
+}
+
+.search-box input[type="search"]::placeholder {
+  color: #bbb;
+}
+
+.search-box button {
+  border: none;
+  border-radius: 0 4px 4px 0;
+  background-color: #444;
+  color: #fff;
+  cursor: pointer;
+}
+
+.search-box button:hover {
+  background-color: #2980b9;
+}
+
+/* Images from the img shortcode */
+figure {
+  margin: 1em 0;
+}
+
+figcaption {
+  color: #777;
+  font-size: 0.9em;
+  text-align: center;
+}
+
+/* Code blocks highlighted by Hugo (Chroma) */
+.highlight pre {
+  padding: 10px;
+  overflow-x: auto;
+  border-radius: 5px;
+}
+
+/* Share buttons */
+ul.share-buttons {
+  list-style: none;
+  padding: 0;
+}
+
+ul.share-buttons li {
+  display: inline;
+  margin-right: 0.8em;
+}
+
+.sr-only {
+  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0;
+  border: 0;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+}

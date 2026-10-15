@@ -1,0 +1,25 @@
+{{- /*
+  Responsive image from the post's page bundle, resized at build time.
+
+  Usage: {{< img src="photo.jpg" alt="Description" width="800" caption="Optional" >}}
+
+  - Images wider than `width` (default 1000px) are scaled down.
+  - GIF, SVG, missing resources and external URLs are shown unchanged.
+*/ -}}
+{{- $src := .Get "src" }}
+{{- $alt := .Get "alt" }}
+{{- $maxWidth := int (.Get "width" | default 1000) }}
+{{- $img := .Page.Resources.GetMatch $src }}
+<figure>
+{{- if and $img (in (slice "jpeg" "png" "webp" "tiff" "bmp") $img.MediaType.SubType) }}
+  {{- if gt $img.Width $maxWidth }}
+    {{- $img = $img.Resize (printf "%dx" $maxWidth) }}
+  {{- end }}
+  <img class="pure-img" src="{{ $img.RelPermalink }}" alt="{{ $alt }}" width="{{ $img.Width }}" height="{{ $img.Height }}" loading="lazy" decoding="async">
+{{- else }}
+  <img class="pure-img" src="{{ with $img }}{{ .RelPermalink }}{{ else }}{{ $src | relURL }}{{ end }}" alt="{{ $alt }}"{{ with .Get "width" }} width="{{ . }}"{{ end }} loading="lazy" decoding="async">
+{{- end }}
+{{- with .Get "caption" }}
+  <figcaption>{{ . }}</figcaption>
+{{- end }}
+</figure>

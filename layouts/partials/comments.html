@@ -1,0 +1,23 @@
+{{- /* giscus comments, configured in [params.giscus]. Disabled until repo, repoId and categoryId are set. */ -}}
+{{- with site.Params.giscus }}
+{{- if and .repo .repoId .categoryId }}
+<div id="comments">
+  <script src="https://giscus.app/client.js"
+          data-repo="{{ .repo }}"
+          data-repo-id="{{ .repoId }}"
+          data-category="{{ .category }}"
+          data-category-id="{{ .categoryId }}"
+          data-mapping="{{ .mapping | default "pathname" }}"
+          data-strict="0"
+          data-reactions-enabled="{{ .reactionsEnabled | default "1" }}"
+          data-emit-metadata="0"
+          data-input-position="{{ .inputPosition | default "bottom" }}"
+          data-theme="{{ .theme | default "light" }}"
+          data-lang="{{ .lang | default "en" }}"
+          data-loading="lazy"
+          crossorigin="anonymous"
+          async>
+  </script>
+</div>
+{{- end }}
+{{- end }}

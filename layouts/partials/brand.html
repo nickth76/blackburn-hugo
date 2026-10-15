@@ -1,0 +1,7 @@
+<a class="pure-menu-heading brand" href="{{ site.Home.RelPermalink }}">
+  {{- with site.Params.logo -}}
+  <img src="{{ strings.TrimPrefix "/" . | strings.TrimPrefix "static/" | relURL }}" alt="{{ site.Title }}" width="{{ site.Params.logoWidth | default 35 }}">
+  {{- else -}}
+  {{ site.Params.brand | default site.Title | safeHTML }}
+  {{- end -}}
+</a>

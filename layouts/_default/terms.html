@@ -1,0 +1,17 @@
+{{ partial "header.html" . }}
+
+<div class="header">
+  <h1>{{ .Title }}</h1>
+</div>
+<div class="content">
+  <ul>
+  {{- range .Data.Terms.ByCount }}
+    <li>
+      <a href="{{ .Page.RelPermalink }}">{{ .Page.LinkTitle }}</a>
+      <span>&#40;{{ .Count }}&#41;</span>
+    </li>
+  {{- end }}
+  </ul>
+</div>
+
+{{ partial "footer.html" . }}

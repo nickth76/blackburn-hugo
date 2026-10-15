@@ -1,0 +1,49 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {{- $desc := site.Params.description }}
+  {{- if .IsPage }}
+    {{- $desc = .Description | default (.Summary | plainify | htmlUnescape | truncate 160) }}
+  {{- end }}
+  {{- with $desc }}
+  <meta name="description" content="{{ . }}">
+  {{- end }}
+  {{ hugo.Generator }}
+
+  <title>{{ if .IsHome }}{{ site.Title }}{{ else }}{{ .Title }} &middot; {{ site.Title }}{{ end }}</title>
+  <link rel="canonical" href="{{ .Params.canonical | default .Permalink }}">
+
+  <!-- CSS -->
+  {{- $purecss := "https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/" }}
+  <link rel="stylesheet" href="{{ $purecss }}pure-min.css">
+  <link rel="stylesheet" href="{{ $purecss }}grids-responsive-min.css">
+  <link rel="stylesheet" href="{{ "css/side-menu.css" | relURL }}">
+  <link rel="stylesheet" href="{{ "css/blackburn.css" | relURL }}">
+  <link rel="stylesheet" href="{{ "css/blackburn-modern.css" | relURL }}">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway&display=swap">
+
+  {{- if or .Params.math site.Params.math }}
+  <!-- MathJax -->
+  <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  {{- end }}
+
+  <!-- RSS -->
+  {{- with .OutputFormats.Get "rss" }}
+  <link rel="alternate" type="application/rss+xml" title="{{ site.Title }}" href="{{ .RelPermalink }}">
+  {{- end }}
+
+  {{ partial "favicon.html" . }}
+
+  {{- range site.Params.custom_css }}
+  <link rel="stylesheet" href="{{ . | relURL }}">
+  {{- end }}
+  {{- range site.Params.custom_js }}
+  <script src="{{ . | relURL }}"></script>
+  {{- end }}
+</head>

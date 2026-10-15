@@ -1,0 +1,13 @@
+{{- if ne site.Params.share false }}
+<div class="share">
+  <h4><i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Share</h4>
+  <ul class="share-buttons">
+    <li><a href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink }}" target="_blank" rel="noopener" title="Share on Facebook"><i class="fab fa-facebook" aria-hidden="true"></i><span class="sr-only">Share on Facebook</span></a></li>
+    <li><a href="https://x.com/intent/tweet?url={{ .Permalink }}&text={{ .Title }}" target="_blank" rel="noopener" title="Share on X"><i class="fab fa-twitter" aria-hidden="true"></i><span class="sr-only">Share on X</span></a></li>
+    <li><a href="https://www.linkedin.com/sharing/share-offsite/?url={{ .Permalink }}" target="_blank" rel="noopener" title="Share on LinkedIn"><i class="fab fa-linkedin" aria-hidden="true"></i><span class="sr-only">Share on LinkedIn</span></a></li>
+    <li><a href="https://www.reddit.com/submit?url={{ .Permalink }}&title={{ .Title }}" target="_blank" rel="noopener" title="Submit to Reddit"><i class="fab fa-reddit-alien" aria-hidden="true"></i><span class="sr-only">Submit to Reddit</span></a></li>
+    <li><a href="https://t.me/share/url?url={{ .Permalink }}&text={{ .Title }}" target="_blank" rel="noopener" title="Share on Telegram"><i class="fab fa-telegram-plane" aria-hidden="true"></i><span class="sr-only">Share on Telegram</span></a></li>
+    <li><a href="mailto:?subject={{ .Title }}&body={{ .Permalink }}" title="Share by email"><i class="fas fa-envelope" aria-hidden="true"></i><span class="sr-only">Share by email</span></a></li>
+  </ul>
+</div>
+{{- end }}

@@ -1,0 +1,6 @@
+{{- /* Site search through DuckDuckGo, limited to this site's host. */ -}}
+<form class="search-box" action="https://duckduckgo.com/" method="get" target="_blank" role="search">
+  <input type="hidden" name="sites" value="{{ (urls.Parse site.BaseURL).Host }}">
+  <input type="search" name="q" placeholder="{{ site.Params.searchPlaceholder | default "Search..." }}" aria-label="Search">
+  <button type="submit" aria-label="Search"><i class="fa fa-search"></i></button>
+</form>

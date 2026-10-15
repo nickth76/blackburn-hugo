@@ -1,0 +1,4 @@
+{{- $icon := site.Params.favicon | default "img/favicon.ico" }}
+{{- $icon = strings.TrimPrefix "/" $icon | strings.TrimPrefix "static/" }}
+{{- $types := dict ".ico" "image/x-icon" ".png" "image/png" ".svg" "image/svg+xml" }}
+<link rel="icon" href="{{ $icon | relURL }}"{{ with index $types (path.Ext $icon) }} type="{{ . }}"{{ end }}>

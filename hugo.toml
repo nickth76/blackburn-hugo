@@ -1,0 +1,118 @@
+# Hugo site using the Blackburn theme, updated for current Hugo releases.
+# Requires Hugo >= 0.158.0 (tested with 0.168.0).
+
+baseURL = "https://example.org/"
+title = "My Blog"
+theme = "blackburn"
+locale = "en-US"                # e.g. "el-GR"
+defaultContentLanguage = "en"   # e.g. "el"
+copyright = "&copy; Your Name"
+enableRobotsTXT = true
+
+[module.hugoVersion]
+  min = "0.158.0"
+
+[pagination]
+  pagerSize = 10
+
+[services.rss]
+  limit = 20
+
+[taxonomies]
+  tag = "tags"
+  topic = "topics"
+
+[markup.goldmark.renderer]
+  # Allows raw HTML inside Markdown. Only safe because you write the content.
+  unsafe = true
+
+[markup.highlight]
+  # Code is highlighted by Hugo at build time; no JavaScript needed.
+  codeFences = true
+  guessSyntax = true
+  style = "monokai"
+
+[params]
+  subtitle = "A short tagline for the home page"
+  brand = "My Blog"               # text at the top of the side menu
+  # logo = "img/logo.png"         # image instead of the brand text (path inside static/)
+  # logoWidth = 35
+  description = ""                # default meta description
+  dateFormat = "02 Jan 2006"      # month names follow the site language
+  favicon = "img/favicon.ico"     # path inside static/, without a "static/" prefix
+  search = true                   # DuckDuckGo search box limited to this site
+  share = true                    # share buttons under each post
+  math = false                    # MathJax on every page; or `math = true` in a post's front matter
+  custom_css = []                 # e.g. ["css/custom.css"] (files in static/)
+  custom_js = []
+  # googleAnalytics = "G-XXXXXXXXXX"
+  # goatcounterAnalytics = "your-code"
+
+  # Comments with giscus (https://giscus.app). Leave repo empty to disable.
+  [params.giscus]
+    repo = ""                     # "owner/repo"
+    repoId = ""
+    category = "General"
+    categoryId = ""
+    mapping = "pathname"
+    lang = "en"
+    theme = "light"
+    reactionsEnabled = "1"
+    inputPosition = "bottom"
+
+  # Links in the side menu. Each value can be a username or a full URL.
+  [params.social]
+    # github = "username"
+    # gitlab = "username"
+    # codeberg = "username"
+    # mastodon = "@username@instance.tld"   # or "https://instance.tld/@username"
+    # bluesky = "username.bsky.social"
+    # matrix = "#room:matrix.org"
+    # telegram = "username"
+    # keybase = "username"
+    # linkedin = "username"
+    # youtube = "@handle"
+
+  # Any other link, e.g. a Fediverse instance not listed above.
+  # [[params.social_links]]
+  #   name = "Fediverse"
+  #   url = "https://instance.example/@username"
+  #   icon = "fab fa-mastodon"    # Font Awesome 5 class
+
+[menu]
+  [[menu.main]]
+    name = "Home"
+    pre = "<i class='fa fa-home fa-fw'></i>"
+    weight = 1
+    identifier = "home"
+    pageRef = "/"
+  [[menu.main]]
+    name = "Posts"
+    pre = "<i class='fa fa-list fa-fw'></i>"
+    weight = 2
+    identifier = "post"
+    pageRef = "/post"
+  [[menu.main]]
+    name = "Topics"
+    pre = "<i class='fa fa-folder fa-fw'></i>"
+    weight = 3
+    identifier = "topics"
+    pageRef = "/topics"
+  [[menu.main]]
+    name = "Tags"
+    pre = "<i class='fa fa-tags fa-fw'></i>"
+    weight = 4
+    identifier = "tags"
+    pageRef = "/tags"
+  [[menu.main]]
+    name = "About"
+    pre = "<i class='fa fa-user fa-fw'></i>"
+    weight = 5
+    identifier = "about"
+    pageRef = "/about"
+  [[menu.main]]
+    name = "Contact"
+    pre = "<i class='fa fa-envelope fa-fw'></i>"
+    weight = 6
+    identifier = "contact"
+    pageRef = "/contact"
